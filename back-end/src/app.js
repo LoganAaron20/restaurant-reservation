@@ -8,11 +8,13 @@ const cors = require("cors");
 const errorHandler = require("./errors/errorHandler");
 const notFound = require("./errors/notFound");
 const reservationsRouter = require("./reservations/reservations.router");
+const { urlencoded } = require("express");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(urlencoded({ extended: true }));
 
 app.use("/reservations", reservationsRouter);
 
