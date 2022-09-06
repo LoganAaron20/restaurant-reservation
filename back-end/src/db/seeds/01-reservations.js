@@ -50,5 +50,13 @@ exports.seed = function (knex) {
       created_at: "2020-12-10T08:31:32.326Z",
       updated_at: "2020-12-10T08:31:32.326Z",
     },
+    {
+      first_name: "Logan",
+      last_name: "Aaron",
+      mobile_number: "205-405-3215",
+      reservation_date: "2022-09-06",
+      reservation_time: "18:00",
+      people: 1,
+    },
   ]);
 };
