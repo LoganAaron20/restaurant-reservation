@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./reservationForm.styles.css";
 const { REACT_APP_API_BASE_URL } = process.env;
 
@@ -24,8 +24,11 @@ const ReservationForm = () => {
   let handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let res = await fetch(`${URL}/reservations/new`, {
+      let res = await fetch(`${URL}/reservations`, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           first_name: firstName,
           last_name: lastName,
@@ -62,7 +65,7 @@ const ReservationForm = () => {
       </h2>
       <div className="container">
         <div className="title">Reservation</div>
-        <form action="#" method="post" onSubmit={handleSubmit}>
+        <form action="/reservations" method="post" onSubmit={handleSubmit}>
           <div className="reservation-details">
             <div className="input-box">
               <span className="details">First Name</span>
