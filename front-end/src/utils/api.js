@@ -1,3 +1,4 @@
+import axios from "axios";
 /**
  * Defines the base URL for the API.
  * The default values is overridden by the `API_BASE_URL` environment variable.
@@ -5,8 +6,10 @@
 import formatReservationDate from "./format-reservation-date";
 import formatReservationTime from "./format-reservation-date";
 
-const API_BASE_URL =
+export const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL || "http://localhost:5001";
+
+// export const API_BASE_URL = "http://localhost:5001";
 
 /**
  * Defines the default headers for these functions to work with `json-server`
@@ -20,7 +23,7 @@ headers.append("Content-Type", "application/json");
  * This function is NOT exported because it is not needed outside of this file.
  *
  * @param url
- *  the url for the requst.
+ *  the url for the request.
  * @param options
  *  any options for fetch
  * @param onCancel
@@ -38,7 +41,6 @@ async function fetchJson(url, options, onCancel) {
     }
 
     const payload = await response.json();
-
     if (payload.error) {
       return Promise.reject({ message: payload.error });
     }
@@ -67,3 +69,25 @@ export async function listReservations(params, signal) {
     .then(formatReservationDate)
     .then(formatReservationTime);
 }
+
+/**
+ * Retrieves all existing tables.
+ * @returns {Promise<[table]>}
+ *  a promise that resolves to a possibly empty array of table saved in the database.
+ */
+export async function listTables() {
+  const { data } = await axios.get(`${API_BASE_URL}/tables`);
+  return data.data;
+}
+/**
+ * Finds reservation by ID
+ * @returns {Promise<[reservation]>}
+ *  a promise that resolves to a possibly empty array of reservation saved in the database.
+ */
+
+export const findReservation = async (reservationId) => {
+  const res = await axios.get(`${API_BASE_URL}/reservations/${reservationId}`, {
+    data: { reservation_id: reservationId },
+  });
+  return res.data.data;
+};
