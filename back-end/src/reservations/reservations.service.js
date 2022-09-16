@@ -1,38 +1,111 @@
+// const knex = require("../db/connection");
+
+// const create = (newReservation) =>
+//   knex("reservations").insert(newReservation).returning("*");
+
+// const read = (reservationId) =>
+//   knex("reservations")
+//     .select("*")
+//     .where({ reservation_id: reservationId })
+//     .first();
+
+// const update = (reservationId, updatedStatus) =>
+//   knex("reservations")
+//     .select("status")
+//     .where({ reservation_id: reservationId })
+//     .update(updatedStatus, "*");
+
+// const list = (reservationDate) =>
+//   knex("reservations")
+//     .select("*")
+//     .where({ reservation_date: reservationDate })
+//     .orderBy("reservation_time");
+
+// const search = (mobile_number) =>
+//   knex("reservations")
+//     .whereRaw(
+//       "translate(mobile_number, '() -', '') like ?",
+//       `%${mobile_number.replace(/\D/g, "")}%`
+//     )
+//     .orderBy("reservation_date");
+
+// module.exports = {
+//   create,
+//   read,
+//   update,
+//   list,
+//   search,
+// };
+
 const knex = require("../db/connection");
 
-const create = (newReservation) =>
-  knex("reservations").insert(newReservation).returning("*");
+function list(date) {
+  return knex("reservations")
+    .select("*")
+    .whereNot({ status: "finished" })
+    .where({ reservation_date: date })
+    .orderBy("reservation_time");
+}
 
-const read = (reservationId) =>
-  knex("reservations")
+function read(reservationId) {
+  return knex("reservations")
     .select("*")
     .where({ reservation_id: reservationId })
     .first();
+}
 
-const update = (reservationId, updatedStatus) =>
-  knex("reservations")
-    .select("status")
+function create(newReservation) {
+  return knex("reservations")
+    .insert(newReservation)
+    .returning("*")
+    .then((createdRecords) => createdRecords[0]);
+}
+
+function update(reservationId, data) {
+  return knex("reservations")
     .where({ reservation_id: reservationId })
-    .update(updatedStatus, "*");
+    .update(data)
+    .returning("*")
+    .then((createdRecords) => createdRecords[0]);
+}
 
-const list = (reservationDate) =>
-  knex("reservations")
-    .select("*")
-    .where({ reservation_date: reservationDate })
-    .orderBy("reservation_time");
+function updateStatus(reservationId, status) {
+  return knex("reservations")
+    .where({ reservation_id: reservationId })
+    .update({ status: status })
+    .returning("*")
+    .then((createdRecords) => createdRecords[0]);
 
-const search = (mobile_number) =>
-  knex("reservations")
+  // return knex.transaction(function (trx) {
+  //   return trx
+  //     .update({ reservation_id: reservationId })
+  //     .where({ table_id: tableId })
+  //     .into("tables")
+  //     .then(function () {
+  //       return trx("reservations")
+  //         .where({ reservation_id: reservationId })
+  //         .update({ status: "seated" });
+  //     })
+  //     .catch(function (error) {
+  //       console.error(error);
+  //     });
+  // });
+}
+
+function search(mobile_number) {
+  return knex("reservations")
     .whereRaw(
       "translate(mobile_number, '() -', '') like ?",
       `%${mobile_number.replace(/\D/g, "")}%`
     )
     .orderBy("reservation_date");
+}
 
 module.exports = {
-  create,
-  read,
-  update,
   list,
+  read,
+  create,
+  update,
+  updateStatus,
   search,
 };
