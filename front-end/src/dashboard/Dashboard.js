@@ -20,6 +20,7 @@ function Dashboard({ date, setDate }) {
   useEffect(loadDashboard, [date]);
 
   function loadDashboard() {
+    console.log("INSIDE THE USEEFFECT!!");
     const abortController = new AbortController();
     setReservationsError(null);
     setTablesError(null);
@@ -27,9 +28,10 @@ function Dashboard({ date, setDate }) {
       .then(setReservations)
       .catch(setReservationsError);
     listTables()
-      // .then((tables) => {
-      //   return tables
-      // })
+      .then((tables) => {
+        console.log(tables);
+        return tables;
+      })
       .then(setTables)
       .catch(setTablesError);
     return () => abortController.abort();
