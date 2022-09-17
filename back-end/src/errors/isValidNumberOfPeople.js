@@ -3,11 +3,9 @@ function isValidNumberOfPeople(req, res, next) {
   if (typeof people !== "number" || people < 1) {
     next({
       status: 400,
-      message: `People should be an integer greater than 0`,
+      message: `people should be an integer greater than 0`,
     });
-  } else {
-    next();
-  }
+  } else next();
 }
 
 module.exports = isValidNumberOfPeople;

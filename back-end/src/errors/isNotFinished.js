@@ -5,16 +5,14 @@ function isNotFinished(req, res, next) {
   if (reservation.status === "finished") {
     next({
       status: 400,
-      message: `That reservation is already finished`,
+      message: `That reservations is already finished.`,
     });
   } else if (statues.indexOf(status.toLowerCase()) === -1) {
     next({
       status: 400,
-      message: `${status} os not valid. Only booked, seated, and finished are valid`,
+      message: `${status} is not valid. Only booked, seated, and finished are valid.`,
     });
-  } else {
-    next();
-  }
+  } else next();
 }
 
 module.exports = isNotFinished;

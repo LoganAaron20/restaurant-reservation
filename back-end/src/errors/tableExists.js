@@ -9,10 +9,7 @@ async function tableExists(req, res, next) {
     res.locals.table = table;
     return next();
   } else {
-    return next({
-      status: 404,
-      message: `Table ${table_id} does not exist!`,
-    });
+    return next({ status: 404, message: `Table ${table_id} cannot be found.` });
   }
 }
 

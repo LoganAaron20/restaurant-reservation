@@ -4,14 +4,10 @@ function isValidStatus(req, res, next) {
     if (status.toLowerCase() !== "booked") {
       next({
         status: 400,
-        message: `${status} is not allowed. Only booked is allowed`,
+        message: `${status} statues are not allowed. Only booked is allowed.`,
       });
-    } else {
-      next();
-    }
-  } else {
-    next();
-  }
+    } else next();
+  } else next();
 }
 
 module.exports = isValidStatus;

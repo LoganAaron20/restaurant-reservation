@@ -14,7 +14,7 @@ function isValidDate(req, res, next) {
   const { data: { reservation_date } = {} } = req.body;
 
   const dateToCheck = new Date(reservation_date);
-  let dateNumbers = reservationDate.split("-");
+  let dateNumbers = reservation_date.split("-");
   let day = new Date(
     dateNumbers[0],
     dateNumbers[1] - 1,
@@ -22,23 +22,18 @@ function isValidDate(req, res, next) {
   ).getDay();
 
   if (isNaN(dateToCheck.getDate())) {
-    next({
-      status: 400,
-      message: `Reservation date is not a valid date.`,
-    });
+    next({ status: 400, message: `reservation_date is not a valid date` });
   } else if (!isFutureDate(reservation_date)) {
     next({
       status: 400,
-      message: `Reservation date must be in the future`,
+      message: `reservation_date must be a date in the future`,
     });
   } else if (day === 2) {
     next({
       status: 400,
-      message: `Reservation date is closed because it falls on a Tuesday`,
+      message: `reservation_date is closed because it falls on a Tuesday`,
     });
-  } else {
-    return next();
-  }
+  } else next();
 }
 
 module.exports = isValidDate;

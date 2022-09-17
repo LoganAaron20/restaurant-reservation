@@ -3,11 +3,9 @@ function isValidCapacity(req, res, next) {
   if (typeof capacity !== "number" || capacity < 1) {
     next({
       status: 400,
-      message: `capacity should be an integer greater than 0.`,
+      message: `capacity should be an integer greater than 0`,
     });
-  } else {
-    return next();
-  }
+  } else next();
 }
 
 module.exports = isValidCapacity;

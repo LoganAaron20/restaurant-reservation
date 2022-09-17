@@ -25,23 +25,18 @@ function isValidTime(req, res, next) {
     minutes < 0 ||
     minutes > 59
   ) {
-    next({
-      status: 400,
-      message: `Reservation time is not a valid time`,
-    });
+    next({ status: 400, message: `reservation_time is not a valid time` });
   } else if (!isAfterCurrentTime(reservation_date, reservation_time)) {
     next({
       status: 400,
-      message: `Reservation time must be after the current time`,
+      message: `reservation_time must be after the current time`,
     });
   } else if (Number(hours + minutes) < 1030 || Number(hours + minutes) > 2130) {
     next({
       status: 400,
-      message: `Reservation time must be between 10:30am and 9:30pm`,
+      message: `reservation_time must be between 10:30AM and 9:30PM`,
     });
-  } else {
-    next();
-  }
+  } else next();
 }
 
 module.exports = isValidTime;
