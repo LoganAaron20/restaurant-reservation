@@ -24,7 +24,7 @@ const ReservationForm = ({ setDate }) => {
 
     reservation_id && findReservation(reservation_id).then(setReservation);
     return () => abortController.abort();
-  }, []);
+  }, [reservation_id]);
 
   const { first_name, last_name, mobile_number, reservation_time } =
     reservation;
@@ -60,7 +60,7 @@ const ReservationForm = ({ setDate }) => {
   };
 
   const onChange = (e) => {
-    setReservationsError({ ...reservation, [e.target.name]: e.target.value });
+    setReservation({ ...reservation, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e) => {
