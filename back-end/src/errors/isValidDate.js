@@ -23,11 +23,11 @@ function isValidDate(req, res, next) {
 
   if (isNaN(dateToCheck.getDate())) {
     next({ status: 400, message: `reservation_date is not a valid date` });
-  } else if (!isFutureDate(reservation_date)) {
-    next({
-      status: 400,
-      message: `reservation_date must be a date in the future`,
-    });
+    // } else if (!isFutureDate(reservation_date)) {
+    //   next({
+    //     status: 400,
+    //     message: `reservation_date must be a date in the future`,
+    //   });
   } else if (day === 2) {
     next({
       status: 400,
