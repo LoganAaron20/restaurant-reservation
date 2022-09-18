@@ -62,7 +62,7 @@ const ReservationForm = ({ setDate }) => {
   };
 
   const onChange = (e) => {
-    setReservationsError({ ...reservation, [e.target.name]: e.target.value });
+    setReservation({ ...reservation, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e) => {
