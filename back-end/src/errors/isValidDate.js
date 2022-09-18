@@ -1,14 +1,14 @@
 const today = require("../utils/date-time");
 
-function isFutureDate(date) {
-  let [year, month, day] = date.split("-");
-  let [todayYear, todayMonth, todayDay] = today().split("-");
+// function isFutureDate(date) {
+//   let [year, month, day] = date.split("-");
+//   let [todayYear, todayMonth, todayDay] = today().split("-");
 
-  const reservationDate = new Date(year, month - 1, day, 0, 0, 0);
-  const todayWithTime = new Date(todayYear, todayMonth - 1, todayDay, 0, 0, 0);
+//   const reservationDate = new Date(year, month - 1, day, 0, 0, 0);
+//   const todayWithTime = new Date(todayYear, todayMonth - 1, todayDay, 0, 0, 0);
 
-  return reservationDate >= todayWithTime;
-}
+//   return reservationDate >= todayWithTime;
+// }
 
 function isValidDate(req, res, next) {
   const { data: { reservation_date } = {} } = req.body;
