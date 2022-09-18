@@ -42,6 +42,7 @@ const ReservationForm = ({ setDate }) => {
       })
       .catch((err) => {
         setReservationsError({ message: err.response.data.error });
+        console.log(reservationsError);
       });
   };
 
