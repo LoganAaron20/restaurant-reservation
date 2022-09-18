@@ -44,7 +44,6 @@ const ReservationForm = ({ setDate }) => {
         setReservationsError({ message: err.response.data.error });
         console.log(reservationsError);
         console.log(reservation);
-        console.log(reservationDate);
       });
   };
 
