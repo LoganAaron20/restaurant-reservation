@@ -43,6 +43,8 @@ const ReservationForm = ({ setDate }) => {
       .catch((err) => {
         setReservationsError({ message: err.response.data.error });
         console.log(reservationsError);
+        console.log(reservation);
+        console.log(reservationDate);
       });
   };
 
@@ -61,7 +63,7 @@ const ReservationForm = ({ setDate }) => {
   };
 
   const onChange = (e) => {
-    setReservation({ ...reservation, [e.target.name]: e.target.value });
+    setReservationsError({ ...reservation, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e) => {
