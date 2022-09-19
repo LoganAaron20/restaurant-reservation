@@ -29,7 +29,7 @@ function isValidTime(req, res, next) {
   } else if (!isAfterCurrentTime(reservation_date, reservation_time)) {
     next({
       status: 400,
-      message: `reservation_time must be after the current time`,
+      message: `reservation_time must be a time in the future!`,
     });
   } else if (Number(hours + minutes) < 1030 || Number(hours + minutes) > 2130) {
     next({
