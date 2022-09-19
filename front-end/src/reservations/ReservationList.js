@@ -47,7 +47,7 @@ const ReservationList = ({ reservation }) => {
                   to={`/reservations/${reservation_id}/seat`}
                   className="btn btn-dark d-block d-md-inline"
                 >
-                  <i className="fas fa-pencil-alt"></i> Edit
+                  <i className="fas fa-pencil-alt"></i> Seat
                 </Link>
               </div>
               <div className="col">
