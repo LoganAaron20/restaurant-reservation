@@ -42,6 +42,14 @@ const ReservationList = ({ reservation }) => {
         <div className="d-inline-block ml-auto row row-cols-1">
           {status === "booked" && (
             <Fragment>
+              <div className="col" style={{ marginBottom: "12px" }}>
+                <Link
+                  to={`reservations/${reservation_id}/edit`}
+                  className="btn btn-dark d-block d-md-inline"
+                >
+                  <i className="fas fa-pencil-alt"></i> Edit
+                </Link>
+              </div>
               <div className="col mb-2 justify-content-between">
                 <Link
                   to={`/reservations/${reservation_id}/seat`}
@@ -59,6 +67,14 @@ const ReservationList = ({ reservation }) => {
                   <i className="fas fa-ban"></i> Cancel
                 </button>
               </div>
+              {/* <div className="col">
+                <Link
+                  to={`reservations/${reservation_id}/edit`}
+                  className="btn btn-dark d-block d-md-inline"
+                >
+                  <i className="fas fa-pencil-alt"></i> Edit
+                </Link>
+              </div> */}
             </Fragment>
           )}
         </div>
